@@ -1,0 +1,45 @@
+{% extends 'web/partials/base.html' %}	
+{% load static %}
+{% block content  %}
+
+
+    <link rel="stylesheet" href="{% static 'web/css/sign.css' %}">
+    
+   
+    <section class="maxfit">
+
+        <div class="uper">
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+        <div class="her">
+            <h1>Sign Up</h1>
+        </div>
+            <br>
+            <input type="text" class="yete" placeholder="Username" name="username-3"><br><br>
+            <input type="text" class="yete" placeholder="Fristname" name="firstname-3"><br><br>
+            <input type="text" class="yete" placeholder="Lastname" name="lastname-3"><br><br>
+            <input type="Email" class="yete" placeholder="Email" name="email-3"><br><br>
+            <input type="Password" class="yete" placeholder="Password" name="password-4"><br><br>
+            <input type="Password" class="yete" placeholder="Confirm Password" name="password-5"><br><br>
+
+            <input type="submit" name="myInput" value="Register" class="yetew">
+            <br><br>
+            <div class="hetey">
+                <a href="{% url 'login' %}">Don't Have Account? Sign Up</a>
+            </div>
+            
+        </form>
+            
+        </div>
+
+    </section>
+
+
+
+</body>
+</html>
+
+
+{% endblock %}

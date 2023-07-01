@@ -1,0 +1,53 @@
+{% extends 'web/partials/base.html' %}	
+{% load static %}
+{% block content  %}
+{% load socialaccount %}
+
+
+
+    <link rel="stylesheet" href="{% static 'web/css/login.css' %}">
+    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> {% endcomment %}
+
+    <section class="maxfit">
+
+        <div class="uper">
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% include 'web/message/message.html' %}
+
+        <div class="her">
+            <h1>Sign In</h1>
+        </div>
+            <br>
+
+            <input type="text" class="yete" placeholder="Username" name="name-3"><br><br><br>
+            <input type="number" class="yete" placeholder="Password" name="password-3"><br><br><br>
+
+            <div class="hetr">
+                <h5>Forget Password?</h5>
+            </div>
+            <input type="submit" name="myInput" value="Login" class="yetew">
+            <br><br>
+
+            
+            <a href="{% provider_login_url "google" %}" class="yeteio">Login With Google</a>            
+                       
+            <br><br><br>
+
+          
+
+            <div class="hetey">
+                <a href="{% url 'sign' %}">Don't Have Account? Sign Up</a>
+            </div>
+            
+            </form>
+            
+        </div>
+
+    </section>
+    
+</body>
+</html>
+
+{% endblock %}

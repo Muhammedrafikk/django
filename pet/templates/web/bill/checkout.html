@@ -1,0 +1,203 @@
+{% extends 'web/partials/base.html' %}	
+{% load static %}
+{% load cart_tag %}
+{% block content  %}
+
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css" rel="stylesheet"> {% endcomment %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'web/css/checkout.css' %}">
+    
+</head>
+<body>
+
+
+
+    <section class="h-100 h-" style="background-color: #ffffff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100 ">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color: #e9e9e9">
+                <div class="card-body p-0">
+
+
+                   
+
+                  <div class="row g-0">
+                    <div class="col-lg-8">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          
+                        </div>
+
+
+                        <!-- start -->
+
+                        <div class="h3 fw-b">Billing Address</div>
+                              <br>  
+                        <!--Name-->
+
+                      
+                        <form action="{% url 'phonefrom' %}" method="POST">
+
+                          {% csrf_token %}
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>First Name</label>
+                            <div class="form-group"> <input type="text" name="firstname" class="form-control"> </div>
+                          </div>
+                          </div>
+
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>Last Name</label>
+                            <div class="form-group">  <input type="text"name="lastname" class="form-control"> </div>
+                          </div>
+                          </div>
+                          
+                        </div>
+                        <!-- Company Name -->
+                        
+                        <div class="form-group"> <label>Company Name</label> <input type="text" name="company" class="form-control"> </div>
+                        
+                        <!-- country -->        
+                        <label>Country</label> <br>
+                        <select class="form-control" name="country" id="country" >
+                            <option value="usa">USA</option>
+                            <option value="ind">INDIA</option>
+                        </select>
+                        <br>
+              
+                        <!-- Street Address -->
+
+                        <div class="form-group"> <label>Street Address</label> <input type="text" name="add1" class="form-control"> </div>
+
+                        <!-- Town/City         -->
+                        <div class="form-group"> <label>Town/City</label> <input type="text" name="town1" class="form-control"> </div>
+                        
+                        <!-- Postcode/Zip ... State/County -->
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>State/County</label>
+                            <div class="form-group"> <input type="text" name="state2" class="form-control"> </div>
+                          </div>
+                          </div>
+        
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>Postcode/Zip</label>
+                            <div class="form-group">  <input type="text" name="pin1" class="form-control"> </div>
+                          </div>
+                          </div>
+                          
+                        </div>
+
+                        <!-- Phone ... Email Address-->
+
+                        <div class="row">
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>Phone</label>
+                            <div class="form-group"> <input type="text" name="phone1" class="form-control"> </div>
+                          </div>
+                          </div>
+        
+                          <div class="col-lg-6">
+                          <div class="form-group"> <label>Email Addressp</label>
+                            <div class="form-group">  <input type="text" name="email1" class="form-control"> </div>
+                          </div>
+                          </div>
+                          
+                        </div>
+
+                        <!-- Create An Account? -->
+
+                        <div class="form-group"> <label>Account</label> <input type="text" name="account1" class="form-control"> </div>
+                        
+                        <!-- Additional Information -->
+                        <div class="form-group"> <label>Additional Information</label> <input type="text" name="note1" class="form-control"> </div>
+                        
+                        
+                        
+
+
+                        
+
+                        <!-- last -->
+
+
+                        <hr class="my-4">
+      
+                        <div class="pt-5">
+                          <h6 class="mb-0"><a href="#!" class="text-body"><i
+                                class=""></i></a></h6>
+                        </div>
+                      </div>
+                    </div>
+
+
+                <!-- Cart Total    -->
+
+
+                    <div class="col-lg-4 bg-grey">
+                      <div class="p-5">
+                        <h5 class="fw-bold mb-5 mt-2 pt-1">Cart Total</h5>
+                        <hr class="my-4">
+                        {% for key,value in request.session.cart.items %}
+
+      
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">{{value.name}}x{{value.quantity}}</h5>
+                          <h5>{{ value.price|multiply:value.quantity }}</h5>
+                        </div>
+
+                        {% endfor %}
+                        
+                        <h5 class="text-uppercase mb-3">Total Shipping</h5>
+                        
+                     
+                        <div class="d-flex justify-content-between mb-4">
+                        <h5 class="text-uppercase mb-3">Shipping</h5>
+                        <h5>20</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="text-uppercase mb-3">GST</h5>
+                            <h5>10</h5>
+                        </div>
+
+      
+      
+                        <hr class="my-4">
+      
+                        <div class="d-flex justify-content-between mb-5">
+                          <h5 class="text-uppercase">Total</h5>
+                          <h5>{{cart_total_amount|add:20|add:10}}</h5>
+                        </div>
+      
+
+
+                        <!-- <a href="{% url 'checkout' %}"><button type="button" class="btn btn-dark btn-block btn-lg"
+                          data-mdb-ripple-color="dark">PRODUCT TO CHECKOUT</button></a> -->
+
+                          <input type="submit" value="SUBMIT" 
+                          style="background: #02b620; color:#fff; padding: 10px 80px; font-size:20px; border:none; ">
+                    
+                       
+
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+    
+</body>
+</html>
+
+{% endblock %}

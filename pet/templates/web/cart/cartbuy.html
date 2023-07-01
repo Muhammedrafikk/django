@@ -1,0 +1,161 @@
+{% extends 'web/partials/base.html' %}	
+{% load static %}
+{% block content  %}
+{% load cart_tag %}
+
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.css"
+    rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"> {% endcomment %}
+
+  <link rel="stylesheet" href="{% static 'web/css/cartbuy.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet">
+
+  
+   
+</head>
+<body>
+
+
+
+    <section class="h-100 h-custom" style="background-color: #ffffff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100 ">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px; background-color: #e9e9e9">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg-8">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h4 class="text-uppercase fw-bold mb-0 text-black">Shopping Cart</h4>
+                          
+                        </div>
+
+
+                       
+
+
+                        <!-- one -->
+
+
+                        <hr class="my-4">
+
+                        {% for key,value in request.session.cart.items %}
+      
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                          <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img
+                              src="{{value.image}}"
+                              class="img-fluid rounded-3" alt="Cotton T-shirt">
+                          </div>
+                          <br>
+                          <div class="col-md-3 col-lg-3 col-xl-3" style="text-align: center;">
+                            <h6 class="text-muted">{{value.name}}</h6>
+                            <h6 class="text-black mb-0">{{ value.price}}</h6>
+                          </div>
+
+                          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <a href="{% url 'item_decrement' value.product_id %}">
+                              <button class="btn btn-link px-2"
+                              onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                              <i class="fas fa-minus"></i>
+                                </button></a>
+      
+                            <input id="form1" min="0" name="quantity" value="{{value.quantity}}" type="number"
+                              class="form-control form-control-sm" />
+      
+                           <a href="{% url 'item_increment' value.product_id %}"><button class="btn btn-link px-2"
+                              onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                              <i class="fas fa-plus"></i>
+                            </button></a>
+
+
+                          </div>
+
+                         <br><br><br>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="text-align: center;">
+                            <h6 class="mb-0">{{ value.price|multiply:value.quantity }}</h6>
+                          </div>
+
+                          <div class="col-md-1 col-lg-1 col-xl-1 text-end" >
+                            <a href="{% url 'item_clear' key %}"   class="text-muted " style=""><i class="fas fa-times"></i>
+                            </a>
+                          </div>
+                        </div>
+
+                        {% endfor %}
+
+                        <!-- last -->
+
+
+                        <hr class="my-4">
+      
+                        <div class="pt-5">
+                          <h6 class="mb-0">
+                            <a href="{% url 'cart_clear' %}"><input type="submit" value="CLEAR CART" style="background: #02b620; border: none; width: 200px;
+                              height: 40px; color: #fff;
+                              cursor: pointer; font-size: 20px;"></a>
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+
+
+                <!-- Cart Total    -->
+
+
+                    <div class="col-lg-4"  style="background-color: #ffffff;">
+                      <div class="p-5">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Cart Total</h3>
+                        <hr class="my-4">
+      
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">Total Products</h5>
+                          <h5>{{cart_total_amount}}</h5>
+                        </div>
+      
+                        
+                        <h5 class="text-uppercase mb-3">Total Shipping</h5>
+                        
+                     
+                        <div class="d-flex justify-content-between mb-4">
+                        <h5 class="text-uppercase mb-3">Shipping</h5>
+                        <h5>20</h5>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="text-uppercase mb-3">GST</h5>
+                            <h5>10</h5>
+                        </div>
+
+      
+      
+                        <hr class="my-4">
+      
+                        <div class="d-flex justify-content-between mb-5">
+                          <h5 class="text-uppercase">Total price</h5>
+                          <h5>{{cart_total_amount|add:20|add:10}}</h5>
+                        </div>
+      
+                        <a href="{% url 'checkout' %}"><button type="button" class="btn btn-block btn-lg" style="background: #02b620; color: #fff;"
+                          data-mdb-ripple-color="dark">PRODUCT TO CHECKOUT</button></a>
+      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+     <br><br><br><br><br><br><br>
+    
+</body>
+</html>
+
+{% endblock %}
